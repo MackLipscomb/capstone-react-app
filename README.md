@@ -7,3 +7,6 @@ Link to Trello for User stories - https://trello.com/b/TeFyEkcH/medconnect-capst
 
 Routes needed for Back-end:
 ![routes](https://i.imgur.com/CgvSSIo.png)
+
+Entity Relationships:
+![ERD](https://i.imgur.com/k5e3cD7.png)
