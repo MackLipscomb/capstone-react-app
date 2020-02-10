@@ -10,3 +10,6 @@ Routes needed for Back-end:
 
 Entity Relationships:
 ![ERD](https://i.imgur.com/k5e3cD7.png)
+
+Wireframe sketch:
+![Wireframe](https://i.imgur.com/IVbhEgS.png)
