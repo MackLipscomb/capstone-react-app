@@ -15,3 +15,4 @@ Entity Relationships:
 
 Wireframe sketch:
 ![Wireframe](https://i.imgur.com/IVbhEgS.png)
+![Wireframe2](https://i.imgur.com/8lqRyij.png)
