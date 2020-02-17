@@ -1,9 +1,9 @@
 import React from 'react'
-
+import UserDisplay from '../components/UserDisplay'
 function ProviderHome() {
     return (
         <div>
-            Provider Landing/Home
+            <UserDisplay />
         </div>
     )
 }

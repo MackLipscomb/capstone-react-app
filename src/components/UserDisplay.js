@@ -1,17 +1,14 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+import HealthList from './HealthList'
+import UpdateModal from './UpdateModal'
 
-function UserDisplay(props) {
+function UserDisplay() {
     return (
         <div>
-            User Display
+            <HealthList />
+            <UpdateModal />
         </div>
     )
 }
 
-UserDisplay.propTypes = {
-
-}
-
 export default UserDisplay
-

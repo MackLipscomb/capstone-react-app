@@ -1,9 +1,10 @@
 import React from 'react'
+import UserDisplay from '../components/UserDisplay'
 
 function PatientHome() {
     return (
         <div>
-            Patient Landing Page
+            <UserDisplay />
         </div>
     )
 }
