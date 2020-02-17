@@ -3,10 +3,10 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import ProviderHome from './screens/ProviderHome'
 import PatientHome from './screens/PatientHome'
 import Home from './screens/Home'
-
 import HeaderNav from './components/webpage/Nav'
 
 import './styles/styles.css'
+
 
 class App extends Component {
   constructor() {
@@ -22,8 +22,10 @@ class App extends Component {
   login = async (data) => {
     let isPatient = true;
     let id = data['id']
-    if (data['type'] === "patient") {
+    if (data['type'] === "provider") {
       isPatient = false
+      this.props.history.push(`/provider/${id}`)
+    } else if (data['type'] === 'patient') {
       this.props.history.push(`/patient/${id}`)
     }
     this.setState({
@@ -58,7 +60,7 @@ class App extends Component {
       <Router>
           <HeaderNav />
               <Switch>
-                <Route exact path="/" component={Home}/>
+                <Route exact path="/" component={Home} />
                 <Route path="/patient/:id" component={PatientHome}/>
                 <Route path="/provider/:id" component={ProviderHome}/>
               </Switch>

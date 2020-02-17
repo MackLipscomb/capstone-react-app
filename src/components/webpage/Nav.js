@@ -9,6 +9,7 @@ function HeaderNav() {
       <Nav.Link href="#home">Home</Nav.Link>
       <Nav.Link href="#features">Provider</Nav.Link>
     </Nav>
+    {/* If patient or provider is logged in, button should change to "Logout" */}
     <Button variant="primary" size="sm" href="#register">Register</Button>
   </Navbar>
     )
