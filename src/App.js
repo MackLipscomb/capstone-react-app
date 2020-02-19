@@ -1,42 +1,68 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from 'react-router-dom'
+
 import ProviderHome from './screens/ProviderHome'
 import PatientHome from './screens/PatientHome'
 import Home from './screens/Home'
-import HeaderNav from './components/webpage/Nav'
+import SignIn from './screens/SignIn'
+import SignUp from './screens/SignUp'
+
+import Nav from './components/Nav'
 
 import './styles/styles.css'
 
-
 class App extends Component {
-  constructor() {
-    super()
-      this.state = {
-        patient: true,
-        logged: false,
-        loggedId: 0,
-        username: ''
-      }
+  state = {
+    patient: true,
+    auth: false,
+    authId: 0,
+    username: ''
   }
 
-  login = async (data) => {
-    let isPatient = true;
-    let id = data['id']
-    if (data['type'] === "provider") {
-      isPatient = false
-      this.props.history.push(`/provider/${id}`)
-    } else if (data['type'] === 'patient') {
-      this.props.history.push(`/patient/${id}`)
-    }
-    this.setState({
-      logged: true,
-      patient: isPatient,
-      loggedID: id,
-      username: data['username']
+  login = async (userCredentials) => {
+    // login user
+    const response = fetch(`${process.env.REACT_APP_API_URL}/login`, {
+      method: 'POST',
+      credentials: 'include',
+      body: JSON.stringify(userCredentials),
+      headers: { 'Content-Type': 'application/json' }
     })
+
+    // convert response to json
+    const json = await response.json();
+    console.log(json)
+
+    // // login user and redirect if 200 status code
+    // if (json.status.code === 200) {
+    //     this.props.login(parsedRegisterResponse.data.email)
+    //     this.props.history.push('/')
+    // }
+
+
+
+
+    // let isPatient = true;
+    // let id = data['id']
+    // if (data['type'] === "provider") {
+    //   isPatient = false
+    //   this.props.history.push(`/provider/${id}`)
+    // } else if (data['type'] === 'patient') {
+    //   this.props.history.push(`/patient/${id}`)
+    // }
+    // this.setState({
+    //   auth: true,
+    //   patient: isPatient,
+    //   authID: id,
+    //   username: data['username']
+    // })
   }
 
-  logout = async() => {
+  logout = async () => {
+    // logout user
     const response = await fetch(`${process.env.REACT_APP_API_URL}/logout`, {
       method: 'GET',
       credentials: 'include',
@@ -44,26 +70,56 @@ class App extends Component {
         'Content-Type': 'application/json'
       }
     })
-    const parsedLogoutResponse = await response.json()
-    if (parsedLogoutResponse.status.code === 200) {
+
+    // convert response to json
+    const json = await response.json()
+    if (json.status.code === 200) {
       this.setState({
-        logged: false,
-        loggedId: 0
+        auth: false,
+        authId: 0
       })
     }
+
     this.props.history.push('/')
   }
 
+  register = async (registerInfo) => {
+    // post user data
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/register`, {
+      method: 'POST',
+      credentials: 'include',
+      body: JSON.stringify(registerInfo),
+      headers: { 'Content-Type': 'application/json' }
+    })
+
+    // convert response to json
+    const json = await response.json();
+    console.log(json)
+
+    // // login user and redirect if 200 status code
+    // if (json.status.code === 200) {
+    //     this.props.login(json.data.email)
+    //     this.props.history.push('/')
+    // }
+  }
 
   render() {
-  return (
+    // destructure state
+    const { auth } = this.state
+
+    return (
       <Router>
-          <HeaderNav />
-              <Switch>
-                <Route exact path="/" component={Home} />
-                <Route path="/patient/:id" component={PatientHome}/>
-                <Route path="/provider/:id" component={ProviderHome}/>
-              </Switch>
+        <Nav
+          auth={auth}
+          logout={this.logout}
+        />
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="/patient" component={PatientHome} />
+          <Route path="/provider" component={ProviderHome} />
+          <Route path="/sign-in" render={(...props) => <SignIn props={props} login={this.login} />} />
+          <Route path="/sign-up" render={(...props) => <SignUp props={props} register={this.register} />} />
+        </Switch>
       </Router>
     )
   }
