@@ -25,25 +25,26 @@ class App extends Component {
 
   login = async (userCredentials) => {
     // login user
-    const response = fetch(`${process.env.REACT_APP_API_URL}/login`, {
+    console.log(userCredentials)
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/login`, {
       method: 'POST',
       credentials: 'include',
       body: JSON.stringify(userCredentials),
       headers: { 'Content-Type': 'application/json' }
     })
-
+    console.log(response)
+    const testParse = await response.json()
+    const patient = testParse.data
+    console.log(patient)
     // convert response to json
-    const json = await response.json();
-    console.log(json)
+    // const json = await response.json();
+    // console.log(json)
 
     // // login user and redirect if 200 status code
     // if (json.status.code === 200) {
     //     this.props.login(parsedRegisterResponse.data.email)
     //     this.props.history.push('/')
     // }
-
-
-
 
     // let isPatient = true;
     // let id = data['id']
@@ -85,6 +86,7 @@ class App extends Component {
 
   register = async (registerInfo) => {
     // post user data
+    console.log(registerInfo)
     const response = await fetch(`${process.env.REACT_APP_API_URL}/register`, {
       method: 'POST',
       credentials: 'include',

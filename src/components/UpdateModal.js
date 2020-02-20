@@ -1,11 +1,11 @@
-import React, { useState, render }from 'react'
-import { Modal, Button } from 'react-bootstrap'
+import React, { useState } from 'react'
+import { Modal, Button, Form } from 'react-bootstrap'
 
 function UpdateModal() {
-    const [show, setShow] = useState(false);
+  const [show, setShow] = useState(false);
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   
     return (
       <>
@@ -15,9 +15,11 @@ function UpdateModal() {
   
         <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title>Modal heading</Modal.Title>
+            <Modal.Title>Update This Health Condition</Modal.Title>
           </Modal.Header>
-          <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+          <Modal.Body>
+
+          </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={handleClose}>
               Close

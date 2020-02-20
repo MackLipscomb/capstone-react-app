@@ -32,6 +32,7 @@ class SignIn extends Component {
 
         // destructure props
         const { login } = this.props
+        const history = this.props.props[0].history
 
         // build new user object
         const loginInfo = {
@@ -45,6 +46,12 @@ class SignIn extends Component {
 
         // post new user to database
         login(loginInfo)
+
+        if (type === 'Patient') {
+            history.push('/patient')
+        } else {
+            history.push('/provider')
+        }
     }
 
     switch = e => {

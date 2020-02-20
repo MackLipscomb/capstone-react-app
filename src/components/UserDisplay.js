@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import HealthList from './HealthList'
 import UpdateModal from './UpdateModal'
+import PatientHome from '../screens/PatientHome'
+import ProviderHome from '../screens/ProviderHome'
 import { ListGroup, Button } from 'react-bootstrap'
 
 
@@ -186,13 +188,11 @@ class UserDisplay extends Component {
 
         render() {
             return (
-                <>
-            <HealthList issues={this.state.issues}/>
-            
+        <>
 
-            <Button variant="primary">Click to Add or Update Health Issues
+            <HealthList issues={this.state.issues} />
+            <Button variant="primary" >Click to Add or Update Health Issues
             </Button> 
-            
 
         </>
         )
